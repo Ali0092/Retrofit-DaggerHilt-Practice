@@ -9,9 +9,6 @@ interface SimpleApi {
     @GET("posts/1")
     suspend fun getPost():Response<Post>
 
-    @GET("posts/{numberValue}")
-    suspend fun getPostsDynamically(@Path("numberValue") number:Int):Response<Post>
-
     @GET("posts")
     suspend fun getPostList(
         @Query("userId") userId:Int

@@ -11,25 +11,19 @@ import retrofit2.Response
 class MainViewModel(private val repository: Repository):ViewModel() {
 
     val myResponse:MutableLiveData<Response<Post>> = MutableLiveData()
-    val myResponses:MutableLiveData<Response<Post>> = MutableLiveData()
     val myResponselist:MutableLiveData<Response<List<Post>>> = MutableLiveData()
+
+
+    fun getPostlist(userId:Int){
+        viewModelScope.launch {
+            myResponselist.value=repository.getPostL(userId)
+        }
+    }
 
     fun getPost(){
         viewModelScope.launch {
             val response=repository.getPost()
             myResponse.value=response
-        }
-    }
-    fun getPosts(num:Int){
-        viewModelScope.launch {
-            val responses=repository.getPostsD(num)
-            myResponses.value=responses
-        }
-    }
-
-    fun getPostlist(userId:Int){
-        viewModelScope.launch {
-            myResponselist.value=repository.getPostL(userId)
         }
     }
 

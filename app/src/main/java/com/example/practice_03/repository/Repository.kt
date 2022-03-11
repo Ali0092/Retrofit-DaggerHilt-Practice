@@ -11,10 +11,6 @@ class Repository {
         return RetrofitInstance.api.getPost()
     }
 
-    suspend fun getPostsD(number:Int):Response<Post>{
-        return RetrofitInstance.api.getPostsDynamically(number)
-    }
-
     suspend fun getPostL(userId:Int):Response<List<Post>>{
         return RetrofitInstance.api.getPostList(userId)
     }
