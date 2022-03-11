@@ -2,9 +2,7 @@ package com.example.practice_03.api
 
 import com.example.practice_03.model.Post
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface SimpleApi {
 
@@ -18,4 +16,9 @@ interface SimpleApi {
     suspend fun getPostList(
         @Query("userId") userId:Int
     ):Response<List<Post>>
+
+    @PUT("posts/1")
+    suspend fun pushPost(
+        @Body post: Post
+    ):Response<Post>
 }

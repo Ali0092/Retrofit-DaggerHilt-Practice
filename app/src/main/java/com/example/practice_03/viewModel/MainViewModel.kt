@@ -32,4 +32,10 @@ class MainViewModel(private val repository: Repository):ViewModel() {
             myResponselist.value=repository.getPostL(userId)
         }
     }
+
+    fun pushingPost(post:Post){
+        viewModelScope.launch {
+            myResponse.value=repository.pushPost(post)
+        }
+    }
 }
