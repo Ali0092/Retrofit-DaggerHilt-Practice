@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.myResponse.observe(this, Observer { response ->
             if (response.isSuccessful) {
-              Toast.makeText(applicationContext,response.body()?.body,Toast.LENGTH_LONG)
+              Toast.makeText(applicationContext,"${response.body()?.body}",Toast.LENGTH_LONG)
                   .show()
             } else {
                 Toast.makeText(applicationContext, "Response unsuccessful", Toast.LENGTH_LONG)
