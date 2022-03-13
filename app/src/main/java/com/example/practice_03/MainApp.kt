@@ -1,8 +1,8 @@
-package com.example.practice_03.di
+package com.example.practice_03
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class Practice_application: Application() {
+class MainApp: Application() {
 }

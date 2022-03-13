@@ -25,6 +25,9 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun getApi(retrofit: Retrofit):SimpleApi=
-        retrofit.create(SimpleApi::class.java)
+    fun getApi(retrofit: Retrofit):SimpleApi=retrofit.create(SimpleApi::class.java)
+
+    @Provides
+    @Singleton
+    fun getRepo(api: SimpleApi): Repository=Repository(api)
 }
