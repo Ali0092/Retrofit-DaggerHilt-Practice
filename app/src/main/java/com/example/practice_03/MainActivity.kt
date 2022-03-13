@@ -3,29 +3,27 @@ package com.example.practice_03
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.practice_03.adapter.PostAdapter
 import com.example.practice_03.viewModel.MainViewModel
-import com.example.practice_03.viewModel.MainViewModelFactory
 import com.example.practice_03.databinding.ActivityMainBinding
 import com.example.practice_03.model.Post
-import com.example.practice_03.repository.Repository
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val myadapter by lazy { PostAdapter() }
+    private val myAdapter by lazy { PostAdapter() }
+    private val viewModel:MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val repository = Repository()
-        val factory = MainViewModelFactory(repository)
-        val viewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
         val post = Post(1, 1, "post successfully pushed", "chill.com")
 
         SetupRecyclerView()
@@ -44,7 +42,7 @@ class MainActivity : AppCompatActivity() {
 
 
     fun SetupRecyclerView() {
-        binding.recView.adapter = myadapter
+        binding.recView.adapter = myAdapter
         binding.recView.layoutManager = LinearLayoutManager(this)
 
     }
