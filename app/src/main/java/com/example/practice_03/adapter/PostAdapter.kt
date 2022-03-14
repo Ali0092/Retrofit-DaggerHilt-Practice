@@ -31,6 +31,7 @@ class PostAdapter():RecyclerView.Adapter<PostAdapter.MyViewHolder>() {
         return  postL.size
     }
 
+    //Func.. that notifies the changes in RecyclerView....
     @SuppressLint("NotifyDataSetChanged")
    fun DataChanges(postList:List<Post>){
         this.postL=postList

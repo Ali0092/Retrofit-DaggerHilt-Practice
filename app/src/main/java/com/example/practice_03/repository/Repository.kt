@@ -7,8 +7,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class Repository
-@Inject  constructor( private val api: SimpleApi) {
+class Repository ( private val api: SimpleApi) {
 
     suspend fun getPost():Response<Post> {
         return api.getPost()

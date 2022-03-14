@@ -11,19 +11,20 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel
+class MainViewModel //Injecting Repository into the ViewModel Class.....
  @Inject constructor(private val repository: Repository) :ViewModel() {
 
     val myResponse:MutableLiveData<Response<Post>> = MutableLiveData()
-    val myResponselist:MutableLiveData<Response<List<Post>>> = MutableLiveData()
+    val myResponseList:MutableLiveData<Response<List<Post>>> = MutableLiveData()
 
-
+    //Getting list of Responses of same ID..
     fun getPostlist(userId:Int){
         viewModelScope.launch {
-            myResponselist.value=repository.getPostL(userId)
+            myResponseList.value=repository.getPostL(userId)
         }
     }
 
+    //Getting Single Response..
     fun getPost(){
         viewModelScope.launch {
             val response=repository.getPost()
@@ -31,6 +32,7 @@ class MainViewModel
         }
     }
 
+    //Pushing Single instance to the Server..
     fun pushingPost(post:Post){
         viewModelScope.launch {
             myResponse.value=repository.pushPost(post)

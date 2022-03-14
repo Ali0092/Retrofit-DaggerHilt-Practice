@@ -16,6 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    //Variables Declaration....
     private lateinit var binding: ActivityMainBinding
     private val myAdapter by lazy { PostAdapter() }
     private val viewModel by viewModels<MainViewModel>()
@@ -25,15 +26,16 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val post = Post(1, 1, "post successfully pushed", "chill.com")
 
         SetupRecyclerView()
-        viewModel.pushingPost(post)
 
-        viewModel.myResponse.observe(this, Observer { response ->
+        //Getting Data From web Server..
+        viewModel.getPostlist(1)
+        //Observing ViewModel LiveData....
+        viewModel.myResponseList.observe(this, Observer { response ->
             if (response.isSuccessful) {
-              Toast.makeText(applicationContext,"${response.body()?.body}",Toast.LENGTH_LONG)
-                  .show()
+                //Assigning List of Post type Variables to the RecyclerView Adapter..
+                response.body()?.let { myAdapter.DataChanges(it) }
             } else {
                 Toast.makeText(applicationContext, "Response unsuccessful", Toast.LENGTH_LONG)
                     .show()
@@ -41,8 +43,8 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-
-    fun SetupRecyclerView() {
+    //Func. to Initializing RecyclerView....
+    private fun SetupRecyclerView() {
         binding.recView.adapter = myAdapter
         binding.recView.layoutManager = LinearLayoutManager(this)
 
